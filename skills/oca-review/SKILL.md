@@ -1,6 +1,6 @@
 ---
 name: oca-review
-description: Placeholder skill for OCA compliance checks on Odoo addons.
+description: Static OCA compliance checks on Odoo addons.
 metadata:
   tags:
     - odoo
@@ -10,4 +10,4 @@ metadata:
 
 # OCA Review Skill
 
-Use for OCA-style addon review. V1 registers the MCP placeholder `check_oca_compliance(module_path)` and returns a stable `not_implemented` payload.
+Use for OCA-style addon review. Call MCP tool `check_oca_compliance(module_path)` and report blocking errors before warnings.

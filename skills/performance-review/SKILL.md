@@ -1,6 +1,6 @@
 ---
 name: performance-review
-description: Placeholder skill for Odoo performance review and profiling.
+description: Odoo performance review and profiling through static rules and Odoo CLI runs.
 metadata:
   tags:
     - odoo
@@ -10,4 +10,4 @@ metadata:
 
 # Performance Review Skill
 
-Use for performance review requests. V1 includes static performance rules and registers the V3 placeholder `profile_module(module)`.
+Use for performance review requests. Apply static performance rules first, then call MCP tool `profile_module(module, ...)` when the user provides Odoo runtime configuration.

@@ -1,9 +1,0 @@
-{
-  "name": "odoo-pre-commit",
-  "description": "Run Odoo plugin quality checks before commit.",
-  "commands": [
-    "ruff check .",
-    "black --check .",
-    "pytest"
-  ]
-}

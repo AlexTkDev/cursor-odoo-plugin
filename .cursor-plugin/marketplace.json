@@ -1,22 +1,17 @@
 {
-  "name": "cursor-odoo-dev",
-  "displayName": "Cursor Odoo Developer Plugin",
-  "description": "Odoo 16+ development toolkit for Cursor: scaffold, validation, XML review, migration-ready architecture, and runtime placeholders.",
-  "version": "1.0.0",
-  "category": "Development",
-  "publisher": {
-    "name": "Aleksandr"
+  "name": "cursor-odoo-dev-marketplace",
+  "owner": {
+    "name": "AlexTkDev"
   },
-  "license": "MIT",
-  "entrypoints": {
-    "plugin": ".cursor-plugin/plugin.json",
-    "mcp": "mcp.json"
+  "metadata": {
+    "displayName": "Cursor Odoo Developer Plugin",
+    "description": "Marketplace entry for the Cursor Odoo Developer Plugin."
   },
-  "capabilities": [
-    "rules",
-    "skills",
-    "commands",
-    "hooks",
-    "mcp"
+  "plugins": [
+    {
+      "name": "cursor-odoo-dev",
+      "source": ".",
+      "description": "Odoo 16+ development toolkit for Cursor."
+    }
   ]
 }

@@ -41,11 +41,30 @@ def resolve_existing_file(path: str) -> Path:
     return candidate
 
 
-def not_implemented(tool: str, message: str, **metadata: Any) -> dict[str, Any]:
-    return {
-        "ok": False,
-        "status": "not_implemented",
-        "tool": tool,
-        "message": message,
-        "metadata": metadata,
+def tool_result(
+    ok: bool,
+    *,
+    errors: list[dict[str, Any]] | None = None,
+    warnings: list[dict[str, Any]] | None = None,
+    metadata: dict[str, Any] | None = None,
+    data: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "ok": ok,
+        "errors": errors or [],
+        "warnings": warnings or [],
+        "metadata": metadata or {},
     }
+    if data is not None:
+        payload["data"] = data
+    return payload
+
+
+def error_result(code: str, message: str, **metadata: Any) -> dict[str, Any]:
+    return tool_result(False, errors=[{"code": code, "message": message}], metadata=metadata)
+
+
+def tail_text(value: str, limit: int = 12000) -> str:
+    if len(value) <= limit:
+        return value
+    return value[-limit:]

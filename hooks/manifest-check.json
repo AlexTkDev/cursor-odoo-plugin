@@ -1,5 +1,0 @@
-{
-  "name": "odoo-manifest-check",
-  "description": "Validate changed Odoo manifests with validate_manifest.",
-  "tool": "validate_manifest"
-}

@@ -10,6 +10,7 @@
   - `create_module`
   - `validate_manifest`
   - `review_xml`
-- Added V2/V3 placeholder MCP tools with stable `not_implemented` responses.
+- Implemented V2 MCP tools for PostgreSQL introspection, migration analysis, and OCA compliance checks.
+- Implemented V3 MCP tools for Odoo shell evaluation, test running, and profiling through explicit Odoo CLI configuration.
 - Added install and local testing documentation.
 - Replaced local-only `.gitignore` with plugin-source-friendly ignores.

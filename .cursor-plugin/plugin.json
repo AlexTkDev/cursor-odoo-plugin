@@ -6,7 +6,10 @@
   "author": {
     "name": "Aleksandr"
   },
+  "repository": "https://github.com/AlexTkDev/cursor-odoo-plugin",
   "license": "MIT",
+  "logo": "assets/logo.svg",
+  "category": "Developer Tools",
   "keywords": [
     "odoo",
     "cursor",
@@ -15,43 +18,17 @@
     "python",
     "xml"
   ],
-  "rules": [
-    "rules/odoo-python.mdc",
-    "rules/odoo-xml.mdc",
-    "rules/odoo-security.mdc",
-    "rules/odoo-performance.mdc",
-    "rules/oca-compliance.mdc"
+  "tags": [
+    "odoo",
+    "python",
+    "xml",
+    "postgresql",
+    "mcp"
   ],
-  "skills": [
-    "skills/module-scaffold/SKILL.md",
-    "skills/manifest-validator/SKILL.md",
-    "skills/xml-review/SKILL.md",
-    "skills/migration-assistant/SKILL.md",
-    "skills/oca-review/SKILL.md",
-    "skills/performance-review/SKILL.md"
-  ],
-  "commands": [
-    "commands/create-module.md",
-    "commands/create-model.md",
-    "commands/create-wizard.md",
-    "commands/create-security.md",
-    "commands/validate-manifest.md",
-    "commands/review-xml.md",
-    "commands/migrate-module.md"
-  ],
-  "hooks": [
-    "hooks/pre-commit.json",
-    "hooks/manifest-check.json",
-    "hooks/xml-lint.json"
-  ],
-  "mcpServers": {
-    "cursor-odoo-dev": {
-      "command": "python3",
-      "args": [
-        "mcp/server.py"
-      ],
-      "env": {},
-      "description": "Odoo 16+ scaffold, manifest validation, XML review, and runtime-ready placeholders."
-    }
-  }
+  "rules": "rules/",
+  "agents": "agents/",
+  "skills": "skills/",
+  "commands": "commands/",
+  "hooks": "hooks/hooks.json",
+  "mcpServers": "mcp.json"
 }

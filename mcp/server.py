@@ -96,17 +96,38 @@ TOOLS: dict[str, Tool] = {
         ),
         create_module,
     ),
-    "db_list_models": Tool("db_list_models", "V2 placeholder: list Odoo models from PostgreSQL.", object_schema({}), db_list_models),
+    "db_list_models": Tool(
+        "db_list_models",
+        "List Odoo models from PostgreSQL ir_model metadata.",
+        object_schema({"dsn": {"type": "string", "description": "Optional PostgreSQL DSN. Defaults to ODOO_DB_DSN/DATABASE_URL."}}),
+        db_list_models,
+    ),
     "db_describe_model": Tool(
         "db_describe_model",
-        "V2 placeholder: describe a model from PostgreSQL.",
-        object_schema({"model": {"type": "string"}}, ["model"]),
+        "Describe an Odoo model using PostgreSQL registry metadata and table columns.",
+        object_schema(
+            {
+                "model": {"type": "string"},
+                "dsn": {"type": "string", "description": "Optional PostgreSQL DSN. Defaults to ODOO_DB_DSN/DATABASE_URL."},
+            },
+            ["model"],
+        ),
         db_describe_model,
     ),
-    "db_missing_indexes": Tool("db_missing_indexes", "V2 placeholder: find missing PostgreSQL indexes.", object_schema({}), db_missing_indexes),
+    "db_missing_indexes": Tool(
+        "db_missing_indexes",
+        "Find Odoo PostgreSQL tables with heavy sequential scans that may need index review.",
+        object_schema(
+            {
+                "dsn": {"type": "string", "description": "Optional PostgreSQL DSN. Defaults to ODOO_DB_DSN/DATABASE_URL."},
+                "min_seq_scan": {"type": "integer", "default": 1000},
+            }
+        ),
+        db_missing_indexes,
+    ),
     "analyze_migration": Tool(
         "analyze_migration",
-        "V2 placeholder: analyze Odoo 16->17 or 17->18 migration.",
+        "Analyze Odoo 16->17 or 17->18 migration risks with static checks.",
         object_schema(
             {
                 "module_path": {"type": "string"},
@@ -119,26 +140,58 @@ TOOLS: dict[str, Tool] = {
     ),
     "check_oca_compliance": Tool(
         "check_oca_compliance",
-        "V2 placeholder: check OCA compliance.",
+        "Run static OCA compliance checks for an Odoo addon.",
         object_schema({"module_path": {"type": "string"}}, ["module_path"]),
         check_oca_compliance,
     ),
     "odoo_shell_eval": Tool(
         "odoo_shell_eval",
-        "V3 placeholder: evaluate code in an Odoo shell.",
-        object_schema({"code": {"type": "string"}}, ["code"]),
+        "Evaluate code in an Odoo shell. Requires CURSOR_ODOO_ALLOW_SHELL=1.",
+        object_schema(
+            {
+                "code": {"type": "string"},
+                "odoo_bin": {"type": "string", "default": "odoo-bin"},
+                "database": {"type": "string"},
+                "config": {"type": "string"},
+                "addons_path": {"type": "string"},
+                "timeout": {"type": "integer", "default": 300},
+            },
+            ["code"],
+        ),
         odoo_shell_eval,
     ),
     "run_odoo_tests": Tool(
         "run_odoo_tests",
-        "V3 placeholder: run Odoo tests for a module.",
-        object_schema({"module": {"type": "string"}}, ["module"]),
+        "Run Odoo tests for a module through odoo-bin.",
+        object_schema(
+            {
+                "module": {"type": "string"},
+                "odoo_bin": {"type": "string", "default": "odoo-bin"},
+                "database": {"type": "string"},
+                "config": {"type": "string"},
+                "addons_path": {"type": "string"},
+                "timeout": {"type": "integer", "default": 1800},
+                "extra_args": {"type": "array", "items": {"type": "string"}},
+            },
+            ["module"],
+        ),
         run_odoo_tests,
     ),
     "profile_module": Tool(
         "profile_module",
-        "V3 placeholder: profile an Odoo module.",
-        object_schema({"module": {"type": "string"}}, ["module"]),
+        "Profile an Odoo module through a repeatable CLI run with debug_sql logs.",
+        object_schema(
+            {
+                "module": {"type": "string"},
+                "odoo_bin": {"type": "string", "default": "odoo-bin"},
+                "database": {"type": "string"},
+                "config": {"type": "string"},
+                "addons_path": {"type": "string"},
+                "timeout": {"type": "integer", "default": 1800},
+                "mode": {"type": "string", "enum": ["tests", "install"], "default": "tests"},
+            },
+            ["module"],
+        ),
         profile_module,
     ),
 }

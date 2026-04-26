@@ -4,7 +4,7 @@ from mcp.server import TOOLS, call_tool, handle_jsonrpc
 from mcp.tools.scaffold import create_module
 
 
-def test_server_registers_v1_and_placeholders() -> None:
+def test_server_registers_v1_v2_v3_tools() -> None:
     expected = {
         "validate_manifest",
         "review_xml",
@@ -26,10 +26,11 @@ def test_jsonrpc_tools_list() -> None:
     assert response["result"]["tools"]
 
 
-def test_placeholder_response() -> None:
+def test_db_tools_report_configuration_errors() -> None:
     result = call_tool("db_list_models", {})
 
-    assert result["status"] == "not_implemented"
+    assert result["ok"] is False
+    assert result["errors"][0]["code"] in {"db_connection_or_query_failed", "tool_exception"}
 
 
 def test_create_module_scaffold(tmp_path: Path) -> None:
