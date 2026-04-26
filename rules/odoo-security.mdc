@@ -1,0 +1,36 @@
+---
+description: Odoo 16+ ACL, record rule, group, portal, and public method rules
+globs: "**/*.{py,xml,csv}"
+alwaysApply: false
+---
+
+# Odoo Security Rules
+
+## ACLs
+
+- Every new persistent model needs an `ir.model.access.csv` entry unless it is intentionally internal and inaccessible.
+- ACLs must be least-privilege: separate read/write/create/unlink by group.
+- Transient models used by wizards need appropriate access for the groups that launch them.
+
+## Record Rules and Groups
+
+- Use record rules when users should see only a subset of records.
+- Confirm multi-company behavior for company-dependent models.
+- Use existing Odoo groups where possible; create new groups only for a real permission boundary.
+- Menu groups, view groups, ACL groups, and record rule groups must be consistent.
+
+## Public and Portal Exposure
+
+- Public controllers and portal methods must validate tokens, ownership, company, website, and record access.
+- Do not expose unrestricted searches, record IDs, or binary fields to public users.
+- Methods callable through RPC must not rely on client-side checks.
+
+## Sudo and Raw SQL
+
+- `sudo()` requires a local comment explaining why bypassing access rules is safe.
+- Raw SQL must be parameterized and must not bypass record rules for user-facing data unless explicitly controlled.
+
+## Deliverables
+
+- Any new model feature must include security review notes.
+- Missing ACLs, overly broad ACLs, or missing record rules block production readiness.

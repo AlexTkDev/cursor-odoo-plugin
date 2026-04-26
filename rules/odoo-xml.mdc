@@ -1,0 +1,39 @@
+---
+description: Odoo 16+ XML view, data, action, and inheritance rules
+globs: "**/*.xml"
+alwaysApply: false
+---
+
+# Odoo XML Rules
+
+## XML Validity
+
+- XML must parse cleanly and contain a valid `<odoo>` root for module data files unless the file type has a documented exception.
+- XML IDs must be unique within a module.
+- Use stable, descriptive IDs: `<model>_<purpose>_<type>` is preferred.
+
+## Views and Inheritance
+
+- Extend existing views with `inherit_id` and `xpath`; do not copy whole core views.
+- Validate every `inherit_id` reference and every `xpath` expression.
+- `xpath` must target a stable node and include `position`.
+- Avoid brittle xpaths based on translated labels or large positional assumptions.
+- Fields referenced in views must exist on the view model or be inherited from a dependency.
+
+## Odoo 16+ Compatibility
+
+- Warn on legacy `attrs` and `states`; prefer supported Odoo 16+ patterns and migration-ready modifiers.
+- Keep `arch` content well-formed.
+- Use `noupdate="1"` intentionally for data that must not be overwritten on upgrade.
+
+## Actions and Menus
+
+- Menu items must point to valid actions or be intentional parents.
+- Actions must reference valid models and views.
+- Security groups on menus and views must match the intended audience.
+
+## Data Safety
+
+- Do not redefine upstream XML IDs unless the update is intentional.
+- Keep demo data under `demo`; production data belongs in `data`.
+- Avoid destructive data changes in XML without migration notes.

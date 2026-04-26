@@ -1,0 +1,17 @@
+---
+description: OCA-oriented Odoo addon packaging, style, migration, and review rules
+globs: "**/*"
+alwaysApply: false
+---
+
+# OCA Compliance Rules
+
+- Keep addon structure conventional: `__manifest__.py`, `__init__.py`, `models/`, `views/`, `security/`, `data/`, `demo/`, `tests/`.
+- Manifest metadata must include name, version, license, summary/description where useful, depends, data/demo/assets, and installable.
+- Prefer OCA-compatible licenses such as `LGPL-3`, `AGPL-3`, or `OEEL-1` only when appropriate to the module context.
+- Module names must be lowercase snake_case and descriptive.
+- XML IDs, model names, fields, and security groups must be stable for migration.
+- Do not hardcode absolute paths, database names, user IDs, company IDs, or environment-specific URLs.
+- Add migration notes for schema changes, renamed XML IDs, data migrations, or changed access rules.
+- Keep tests focused on business behavior, security boundaries, and upgrade-sensitive code.
+- Run `ruff`, `black`, `pylint-odoo`, `xmllint`, and `pytest` where available.

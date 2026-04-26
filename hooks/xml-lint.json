@@ -1,0 +1,5 @@
+{
+  "name": "odoo-xml-lint",
+  "description": "Review changed Odoo XML files with review_xml and xmllint where available.",
+  "tool": "review_xml"
+}

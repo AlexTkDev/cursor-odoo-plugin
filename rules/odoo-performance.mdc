@@ -1,0 +1,18 @@
+---
+description: Odoo 16+ performance rules for ORM batching, indexes, computes, and views
+globs: "**/*.{py,xml}"
+alwaysApply: false
+---
+
+# Odoo Performance Rules
+
+- Avoid N+1 queries: no `search`, `search_count`, or expensive computed access inside loops without batching.
+- Prefer `read_group` for aggregation and `search_read` for simple list retrieval.
+- Use recordset operations (`mapped`, `filtered`, set operators) while staying aware of prefetch.
+- Add database indexes for frequent exact-match domains, foreign keys used in heavy filters, and migration-safe reporting fields.
+- Do not add indexes blindly; explain the query/domain that needs them.
+- Stored computed fields require complete dependencies and a clear reason to store.
+- Avoid broad `@api.depends` chains that recompute large recordsets unnecessarily.
+- Keep XML views light: avoid loading invisible heavy relational fields unless required by modifiers.
+- Use pagination or limits for operational views and server actions with large datasets.
+- Profile before optimizing complex flows; keep code readable after optimization.

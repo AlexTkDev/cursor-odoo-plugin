@@ -1,0 +1,48 @@
+---
+description: Odoo 16+ Python ORM, model, security, and performance rules
+globs: "**/*.py"
+alwaysApply: false
+---
+
+# Odoo Python Rules
+
+Apply these rules when editing Odoo 16+ addons for Community or Enterprise.
+
+## Models and Naming
+
+- Use `models.Model` for persistent business models, `models.TransientModel` for wizards, and `models.AbstractModel` only for mixins/services.
+- New model `_name` values must be lowercase dot-separated technical names, usually `<module>.<entity>`.
+- Python class names should be PascalCase and match the model intent.
+- Use `_description` for every new `_name`.
+- Prefer `_inherit` to extend existing Odoo behavior instead of modifying core or duplicating models.
+- Do not create a new model when an existing model plus `_inherit` is the correct extension point.
+
+## ORM and API Decorators
+
+- Computed fields must have complete `@api.depends(...)`; every dependency used by the compute must be declared.
+- Constraints must use `@api.constrains(...)`; use `_sql_constraints` for database integrity when possible.
+- Override `create` with `@api.model_create_multi` and process a list of vals dicts.
+- Write code for recordsets: use `for record in self`, avoid assuming singleton unless calling `ensure_one()`.
+- Use `ValidationError` and `UserError` for user-visible failures.
+
+## Security
+
+- Avoid `sudo()` unless it is explicitly required; add a short comment explaining the access boundary.
+- Never use `sudo()` to hide missing ACLs, missing record rules, or a bad domain.
+- Public methods callable through RPC must validate permissions, record ownership, and input values.
+- Portal/public flows must verify website/company/user boundaries explicitly.
+
+## Performance
+
+- Prefer ORM APIs over raw SQL. Use SQL only for measured cases and keep it parameterized.
+- Do not run `search`, `search_count`, `browse`, or expensive computes inside loops when batch alternatives exist.
+- Batch `create`, `write`, and unlink operations where possible.
+- Use `read_group`, `mapped`, `filtered`, domains, and prefetch-aware recordsets instead of manual N+1 logic.
+- Be careful with `store=True`: stored computes need complete dependencies and must justify recomputation cost.
+- Avoid broad unbounded searches; add domains, limits, or indexes for frequent lookups.
+
+## Manifest and Assets
+
+- Declare Python, XML, security, data, demo, JS, SCSS, and QWeb assets in `__manifest__.py`.
+- Keep dependencies explicit in `depends`; do not rely on transitive dependencies.
+- Do not add unsupported or undocumented Odoo APIs.
