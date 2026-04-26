@@ -2,7 +2,7 @@
   "name": "cursor-odoo-dev",
   "displayName": "Cursor Odoo Developer Plugin",
   "description": "Odoo 16+ development toolkit for Cursor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Aleksandr"
   },

@@ -1,0 +1,30 @@
+---
+description: MCP-first workflow for autonomous Odoo agent execution.
+globs: "**/*"
+alwaysApply: false
+---
+
+# Odoo Agent Orchestration
+
+1) Classify intent first, then call exactly one MCP tool per user goal:
+- Codegen/scaffold/module creation → `create_module`
+- Manifest checks → `validate_manifest`
+- XML checks/inheritance review → `review_xml`
+- Odoo migration analysis → `analyze_migration`
+- OCA readiness → `check_oca_compliance`
+- PostgreSQL model introspection → `db_list_models`, `db_describe_model`
+- Missing index discovery → `db_missing_indexes`
+- Odoo tests execution → `run_odoo_tests`
+- Performance profiling → `profile_module`
+- Odoo shell execution (opt-in only) → `odoo_shell_eval`
+
+2) Before finishing, always return:
+- blocking failures first (`ok == false` and errors),
+- then high-risk warnings,
+- then non-blocking recommendations.
+
+3) For runtime tool parameters:
+- if `database` and `config` are not set, `ODOO_RC` is acceptable;
+- if the user did not pass `database`/`config`, return the exact reason (`missing_runtime_target`).
+
+4) For `odoo_shell_eval`, always call out execution risk and the requirement `CURSOR_ODOO_ALLOW_SHELL=1`.

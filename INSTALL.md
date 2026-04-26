@@ -28,6 +28,9 @@ python3 -m pip install -r mcp/requirements.txt
   - `ODOO_RC=/path/to/odoo.conf` or `config`
   - `database`
   - `odoo-bin` in `PATH` (or full path to binary)
+- For hardened file validation in manifest/XML tools:
+  - `CURSOR_ODOO_ALLOW_ABSOLUTE_PATHS=1` to accept absolute paths.
+  - Default behavior is safer: relative paths only, no path traversal with `..`.
 - Shell is enabled only in trusted setups:
 
 ```bash

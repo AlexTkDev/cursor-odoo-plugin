@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -33,7 +34,15 @@ class CheckResult:
 
 
 def resolve_existing_file(path: str) -> Path:
+    if "\x00" in path:
+        raise ValueError(f"Invalid path: {path}")
     candidate = Path(path).expanduser()
+    if any(part == ".." for part in candidate.parts):
+        raise ValueError(f"Path traversal is not allowed: {path}")
+    if not os.environ.get("CURSOR_ODOO_ALLOW_ABSOLUTE_PATHS") and candidate.is_absolute():
+        raise ValueError(
+            "Absolute paths are disabled by default. Use a relative path or set CURSOR_ODOO_ALLOW_ABSOLUTE_PATHS=1."
+        )
     if not candidate.exists():
         raise FileNotFoundError(f"File not found: {path}")
     if not candidate.is_file():

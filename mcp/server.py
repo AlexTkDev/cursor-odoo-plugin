@@ -227,7 +227,7 @@ def handle_jsonrpc(request: dict[str, Any]) -> dict[str, Any] | None:
             result: dict[str, Any] = {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {"tools": {}},
-                "serverInfo": {"name": "cursor-odoo-dev", "version": "1.0.0"},
+                "serverInfo": {"name": "cursor-odoo-dev", "version": "1.0.1"},
             }
         elif method == "tools/list":
             result = list_tools()
