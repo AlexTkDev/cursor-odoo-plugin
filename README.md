@@ -25,15 +25,20 @@ A Cursor plugin to work efficiently with Odoo 16+.
 - `/odoo-profile-module <module_name> [--mode tests|install]`
 - `/odoo-shell-eval <python_code>`
 
-## Works out of the box
+## Works without external runtime
 
 - Module scaffolding
 - Manifest validation
 - XML validation
 - OCA check
 - Quick migration analysis
+
+## Requires configured Odoo/PostgreSQL runtime
+
 - DB metadata tools
-- Odoo runtime test/profiler helpers
+- Odoo test runner
+- Odoo profiler
+- Odoo shell bridge
 
 ## Agent automation
 

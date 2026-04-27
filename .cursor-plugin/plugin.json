@@ -9,7 +9,7 @@
   "repository": "https://github.com/AlexTkDev/cursor-odoo-plugin",
   "license": "MIT",
   "logo": "assets/logo.svg",
-  "category": "Developer Tools",
+  "category": "developer-tools",
   "keywords": [
     "odoo",
     "cursor",
@@ -29,6 +29,5 @@
   "agents": "agents/",
   "skills": "skills/",
   "commands": "commands/",
-  "hooks": "hooks/hooks.json",
   "mcpServers": "mcp.json"
 }

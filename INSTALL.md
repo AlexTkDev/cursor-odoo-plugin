@@ -1,17 +1,25 @@
 # Install
 
-## Install the plugin in Cursor
+## Install from Cursor Marketplace
 
-1. Make sure Cursor is installed.
-2. Register this repository as a local plugin:
+After publication, install through Cursor IDE:
+
+1. Open Cursor.
+2. Go to Settings.
+3. Open Plugins.
+4. Search for `Cursor Odoo Developer Plugin`.
+5. Install and enable it.
+
+## Local development install
+
+For local testing before marketplace approval:
 
 ```bash
 mkdir -p ~/.cursor/plugins/local
 ln -s /Users/alex/Documents/my_project/cursor-odoo-plugin ~/.cursor/plugins/local/cursor-odoo-dev
 ```
 
-3. Restart Cursor.
-4. Enable `cursor-odoo-dev` in plugins list.
+Restart Cursor and enable `cursor-odoo-dev` in Settings -> Plugins.
 
 ## Install dependencies
 
